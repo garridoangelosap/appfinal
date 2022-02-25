@@ -1,0 +1,20 @@
+<mvc:View   controllerName="sapuifinal.gestionrrhh.controller.MasterEmpleados" 
+            xmlns:mvc="sap.ui.core.mvc" 
+            displayBlock="true" 
+            xmlns="sap.m"
+            xmlns:core="sap.ui.core">
+<Page id="pageMasterEmpleado" showHeader="false">
+    <OverflowToolbar class="sapFDynamicPageAlignContent">
+        <Button icon="sap-icon://nav-back" press="onBack"/>
+        <ToolbarSpacer/>
+        <SearchField search=".onSearch"  width="auto"/>
+    </OverflowToolbar>
+    <List id="standardList" items="{empleadosModel>/Users}">
+        <items>
+            <StandardListItem title="{empleadosModel>FirstName} {empleadosModel>LastName}"
+                              description="{empleadosModel>Dni}" 
+                              type="Navigation" press="showEmpleado"/>
+        </items>
+    </List>
+</Page>
+</mvc:View>

@@ -1,0 +1,16 @@
+<mvc:View controllerName="sapuifinal.gestionrrhh.controller.ListaEmpleados" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    displayBlock="true" 
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f">
+<SplitApp>
+    <masterPages>
+        <mvc:XMLView id="masterEmpleadosView" viewName="sapuifinal.gestionrrhh.view.MasterEmpleados"/>
+    </masterPages>
+    <detailPages>
+        <mvc:XMLView id="detailEmpleadosView" viewName="sapuifinal.gestionrrhh.view.DetailEmpleados" /> 
+    </detailPages>
+</SplitApp>
+
+</mvc:View>

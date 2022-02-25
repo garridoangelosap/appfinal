@@ -1,0 +1,67 @@
+//@ts-nocheck
+sap.ui.define([
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+    "sap/ui/core/routing/History",
+],
+/**
+ * @param {typeof sap.ui.core.mvc.Controller} Controller
+ * @param {typeof sap.ui.model.Filter} Filer
+ * @param {typeof sap.ui.model.FilterOperator} FilterOperator
+ * @param {typeof sap.ui.core.routing.History} History
+ */
+function (Controller, Filter, FilterOperator, History) {
+    "use strict";
+
+    return Controller.extend("sapuifinal.gestionrrhh.controller.MasterEmpleados", {
+        onInit: function () {
+            this._bus = sap.ui.getCore().getEventBus();
+
+            var SapId = this.getOwnerComponent().SapId;
+                this.getView().attachAfterRendering(function() {
+                    var sValue1 = SapId;
+                    var sPath = "SapId";
+                    var sOperator = "EQ";
+
+                    var oBinding = this.byId("standardList").getBinding("items");
+                    oBinding.filter([new sap.ui.model.Filter(sPath, sOperator, sValue1)]);
+                });
+        },
+
+        onBack: function(){
+            var oHistory = History.getInstance();
+            var sPreviosHash = oHistory.getPreviousHash();
+
+            if (sPreviosHash !== undefined) {
+                window.history.go(-1);
+             } else {
+                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                 oRouter.navTo("RouteApp", true);
+             }
+        },
+
+        onSearch: function(oEvent){
+            var oTableSearchState = [],
+            sQuery = oEvent.getParameter("query");
+
+            if (sQuery && sQuery.length > 0) {
+                oTableSearchState = [new Filter( {  filters:[
+                                                           new Filter("LastName", FilterOperator.Contains, sQuery),
+                                                           new Filter("FirstName", FilterOperator.Contains, sQuery) 
+                                                        ],
+                                                    and: false
+                                                } )                        
+                                    ];
+            };
+
+            this.getView().byId("standardList").getBinding("items").filter(oTableSearchState);
+        },
+
+        showEmpleado: function(oEvent){
+            var path = oEvent.getSource().getBindingContext("empleadosModel").getPath();
+            this._bus.publish("flexible","showEmpleado", path);
+        }
+
+    });
+});
