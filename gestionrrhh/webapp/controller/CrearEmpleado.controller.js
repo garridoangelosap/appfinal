@@ -337,7 +337,7 @@ sap.ui.define([
             wizardGuardar: function(){
                 var oODataModel = this.getOwnerComponent().getModel("empleadosModel");
                 var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
-                //var tempMail = this._getRandonMail();
+                //var email component
                 var eId = 0;
                 this.getView().getModel("empleadosModel").read("/Users", {
                     filters: [

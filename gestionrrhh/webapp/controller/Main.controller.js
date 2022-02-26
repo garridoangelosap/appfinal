@@ -25,9 +25,10 @@ function (Controller, Library) {
             oRouter.navTo("ListaEmpleados");
         },
          //PRIMERA PARTE DEL MASTER
+         //como no se pudo desplegar la aplicacion se reenvia a la pagina de Logali
         onCallPedidos: function(oEvent){
-            Library.URLHelper.redirect("https://workspaces-ws-lrmhr-app3.us10.trial.applicationstudio.cloud.sap/index.html",true);
-            //window.open("https://workspaces-ws-lrmhr-app3.us10.trial.applicationstudio.cloud.sap/index.html","_blank");
+            Library.URLHelper.redirect("https://logaligroup.com/",true);
+            
         }
     });
 });
